@@ -1,4 +1,4 @@
-window.onload = function() {
+ window.onload = function() {
     var canvas = document.querySelector('canvas');
     canvas.width = 800;
     canvas.height = 600;
@@ -8,13 +8,13 @@ window.onload = function() {
         this.x = x;
         this.y = y;
         this.element = [[x,y],[x,y+10],[x,y+20]];
-        ate = false;
-        defaultMove = true;
+        var ate = false;
+        var defaultMove = true;
         food.appear();
-        this.initSnake = function() {  
+        this.initSnake = function() {
             ctx.beginPath();
             ctx.rect(0,0,800,600);
-            ctx.fillStyle = "blue"
+            ctx.fillStyle = "blue";
             ctx.closePath();
             ctx.fill();
             ctx.beginPath();
@@ -31,7 +31,6 @@ window.onload = function() {
             ctx.fill();
         }
         this.updateSnake = function() {
-            var that = this;
             if(defaultMove){
                 direction = "right"
             }
@@ -53,39 +52,7 @@ window.onload = function() {
                 newX = this.element[0][0];
                 newY = this.element[0][1]-10;
             }
-            document.onkeydown = function(event) {
-                defaultMove = false;
-                event = event||window.event;
-                if (event.keyCode == 40) {
-                    event.preventDefault();
-                    if (that.element[0][0] == that.element[1][0]){
-                        return false; 
-                    }else{
-                        direction = "down";
-                    }
-                }else if(event.keyCode == 37) {
-                    event.preventDefault();
-                    if (that.element[0][1] == that.element[1][1]){
-                        return false;
-                    }else {
-                        direction = "left";
-                    }
-                }else if(event.keyCode == 38) {
-                    event.preventDefault();
-                    if (that.element[0][0] == that.element[1][0]){
-                        return false;
-                    }else {
-                        direction = "up";
-                    }
-                }else if(event.keyCode == 39) {
-                    event.preventDefault();
-                    if (that.element[0][1] == that.element[1][1]){
-                        return false;
-                    }else {
-                        direction = "right";
-                    }
-                }
-            }
+
             this.element.unshift([newX,newY]);
             console.log(direction);
             ctx.clearRect(0,0,800,600);
@@ -93,8 +60,41 @@ window.onload = function() {
             this.eating();
             food.appear();
         }
+        document.onkeydown = function(event) {
+            defaultMove = false;
+            event = event||window.event;
+            if (event.keyCode == 40) {
+                event.preventDefault();
+                if (this.element[0][0] == this.element[1][0]){
+                    return false;
+                }else{
+                    direction = "down";
+                }
+            }else if(event.keyCode == 37) {
+                event.preventDefault();
+                if (this.element[0][1] == this.element[1][1]){
+                    return false;
+                }else {
+                    direction = "left";
+                }
+            }else if(event.keyCode == 38) {
+                event.preventDefault();
+                if (this.element[0][0] == this.element[1][0]){
+                    return false;
+                }else {
+                    direction = "up";
+                }
+            }else if(event.keyCode == 39) {
+                event.preventDefault();
+                if (this.element[0][1] == this.element[1][1]){
+                    return false;
+                }else {
+                    direction = "right";
+                }
+            }
+        }
         this.eating = function() {
-            var headX = this.element[0][0];
+            var headX = this.element[0][0],
                 headY = this.element[0][1];
             ate = Math.abs(headX - food.x) <= 10 && Math.abs(headY - food.y) <= 10;
             if(ate) {
@@ -125,5 +125,5 @@ window.onload = function() {
     eatSnake.initSnake();
     window.setInterval(function() {
         eatSnake.updateSnake();
-    },500);
+    },200);
 }

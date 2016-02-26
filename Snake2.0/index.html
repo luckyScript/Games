@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snake2.0</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <img src="assets/Food.png" style="display: none;" id="food">
+    <script src="Food.js"></script>
+    <script src="Map.js"></script>
+    <script src="Snake.js"></script>
+    <script src="Game.js"></script>
+    <script>
+        var snakeGame = new Game();
+        snakeGame.initGame();
+        window.setInterval(function() {
+            snakeGame.updateGame();
+        },300);
+
+    </script>
+</body>
+</html>
