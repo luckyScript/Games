@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tetris</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="Map.js"></script>
+    <script src="Block.js"></script>
+    <script src="Game.js"></script>
+    <script>
+        var tetris = new Game();
+        tetris.drawMap();
+        tetris.block.init();
+        tetris.drawBlock();
+        window.setInterval(function() {
+            tetris.updateGame();
+        },1000);
+    </script>
+</body>
+</html>
